@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title> Technical Challenges to Data Sharing </title>
+  <meta name="description" content=" RDM with DataLad ">
+  <meta name="author" content=" Stephan Heunis ">
+
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="reveal.js/dist/theme/beige.css">
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="custom_styles.css">
+</head>
+<body>
+
+<div class="reveal">
+<div class="slides">
+
+<!-- FRONT PAGE -->
+<section>
+    <h2>Technical Challenges to Data Sharing</h2>
+    <h4>GliMR Webinar - 23 April 2024</h4>
+    <img src="pics/datalad_git.svg" style="height:300px; margin-bottom: 0; padding-bottom: 0;" alt="title image">
+    <div style="margin-top:0.5em;">
+        <table style="border: none;">
+            <tr>
+                <td>Stephan Heunis<br>
+                    <small>
+                        <a href="https://mas.to/@jsheunis" target="_blank">
+                        <img data-src="pics/mastodon.svg" style="height:30px;margin:0px" />
+                        @jsheunis
+                        </a>
+                    </small>
+                    <small>
+                        <a href="https://github.com/jsheunis" target="_blank">
+                        <img data-src="pics/GitHub.png" style="height:30px;margin:0px" />
+                        jsheunis
+                        </a>
+                    </small>
+                </td>
+                <td style="text-align: center;">
+                    <img style="height:80px;margin-right:1px;margin-bottom:5px;margin-top: 1em; vertical-align:middle;" data-src="pics/fzj_logo.svg" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p style="text-align: center;">
+        <small><a href="http://psychoinformatics.de" target="_blank">Psychoinformatics lab</a>,
+            Institute of Neuroscience and Medicine, Brain &amp; Behavior (INM-7)<br>Research Center Jülich, Germany
+            <br>
+        </small>
+    </p>
+    <div>
+        <small>Slides:&nbsp;</small>
+        <br><a href="https://jsheunis.github.io/glimr-2024">jsheunis.github.io/glimr-2024</a>
+    </div>
+</section>
+
+<section>
+    <h2>Acknowledgements</h2>
+    <table>
+    <tr style="vertical-align:middle">
+      <td style="vertical-align:middle">
+        <dl style="margin-bottom:20px">
+          <dt style="margin-top:20px">DataLad software <br>
+              &amp; ecosystem</dt>
+          <dd style="margin-left:5px!important">
+            <ul style="margin-left:5px!important">
+                <li>Psychoinformatics Lab, <br>
+                Research center Jülich</li>
+                <li>Center for Open <br>
+                Neuroscience, <br>
+                Dartmouth College</li>
+                <li>Joey Hess (git-annex)</li>
+                <li><em>>100 additional contributors</em></li>
+            </ul>
+          </dd>
+        </dl>
+      </td>
+      <td style="vertical-align:middle">
+    <div style="margin-top:-20px;margin-bottom:-20px;text-align:center"><strong>Funders</strong></div>
+    <div style="margin-top:-20px">
+    <img style="height:150px;margin-right:0px" data-src="pics/nsf.png" />
+    <img style="height:150px;margin-right:0px;margin-left:40px" data-src="pics/binc.png" />
+    <img style="height:150px;margin-left:0px" data-src="pics/bmbf_datalad.png" />
+    </div>
+    <div style="margin-top:-20px">
+    <img style="height:80px;margin-top:0px;margin-left:30px" data-src="pics/fzj_logo.svg" />
+    <img style="height:60px;margin-left:50px;margin-bottom:25px" data-src="pics/dfg_logo.png" />
+    </div>
+    <div style="margin-top:-20px">
+    <img style="height:100px" data-src="pics/erc_logo.png" />
+    <img style="height:60px;margin-bottom:35px" data-src="pics/erdf.png" />
+    </div>
+    <div style="margin-top:-20px">
+    <img style="height:80px;margin-right:20px;margin-bottom:5px" data-src="pics/nrw_mkw_logo.png" />
+    <img style="height:60px;margin-right:20px" data-src="pics/cbbs_logo.png" />
+    <img style="height:60px" data-src="pics/LSA-Logo.png" />
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td colspan=2 width="100%">
+    <div style="margin-top:0px">
+    <div style="margin-top:20px;margin-bottom:-50px"><strong>Collaborators</strong></div>
+    <img style="height:100px;margin:0px;margin-left:100px" data-src="pics/cbrain_logo.png" />
+    <img style="height:100px;margin:20px" data-src="pics/hbp_logo.png" />
+    <img style="height:100px;margin:20px" data-src="pics/conp_logo.png" />
+    <img style="height:120px;margin:10px" data-src="pics/openneuro_logo.png" />
+    <img style="height:100px;margin:20px" data-src="pics/ebrain-health-logo.png"/>
+    <img style="height:100px;margin:20px" data-src="pics/GIN_logo.png" />
+    </div>
+    <div style="margin-top:-20px;text-align:center">
+    <img style="height:120px;margin:20px" data-src="pics/sfb1451_logo.png" />
+    <img style="height:140px;margin:10px" data-src="pics/brainlife_logo.png" />
+    <img style="height:100px;margin:20px" data-src="pics/vbc_logo.png" />
+    </div>
+    </td>
+    </tr>
+    </table>
+</section>
+
+<section>
+    <h3><code>Technical challenges to data sharing?</code></h3>
+    <img src="pics/esmrmb/pulp-fiction-john-travolta.gif" alt="john-travolta">
+
+    <p class="fragment fade-in">Not much, <u>relative to the social, procedural and legal challenges</u></p>
+</section>
+
+<section>
+    <h3><code>Development history</code></h3>
+    <br>
+    <img src="pics/esmrmb/developments.png" alt="developments" style="margin-bottom: 2em;">
+    <p class="fragment fade-in"> => As technology develops, so do our tools to share data</p>
+</section>
+
+<section>
+    <h3><code>Of course, there are still challenges:</code></h3>
+    <br>
+    <img src="pics/esmrmb/challenges.png" alt="challenges" style="margin-bottom: 2em;">
+</section>
+
+
+<section>
+    <h3><code>But there are also existing solutions:</code></h3>
+    <br>
+    <img src="pics/esmrmb/solutions.png" alt="solutions.png" style="margin-bottom: 2em;">
+</section>
+
+
+<section>
+    <h3><code>All roads lead to data: 1</code></h3>
+    <br>
+    <img src="pics/esmrmb/data_sharing_infra_datatouser_jsheunis.png" alt="data_sharing_infra_datatouser_jsheunis.png" style="margin-bottom: 2em;">
+
+    <p class="fragment fade-in"> => Free for all</p>
+</section>
+
+
+<section>
+    <h3><code>All roads lead to data: 2</code></h3>
+    <br>
+    <img src="pics/esmrmb/data_sharing_infra_usertodata_jsheunis.png" alt="data_sharing_infra_usertodata_jsheunis.png" style="margin-bottom: 2em;">
+    
+    <p class="fragment fade-in"> => So-called data islands</p>
+</section>
+
+
+<section>
+    <h3><code>All roads lead to data: 3</code></h3>
+    <br>
+    <img src="pics/esmrmb/data_sharing_infra_codetodata_jsheunis.png" alt="data_sharing_infra_codetodata_jsheunis.png" style="margin-bottom: 2em;">
+
+    <p class="fragment fade-in"> => Users don't see the actual data, develop code based on samples
+    </p>
+</section>
+
+<section>
+    <h3><code>All roads lead to data: 4</code></h3>
+    <br>
+    <img src="pics/esmrmb/data_sharing_infra_federated_codetodata_jsheunis.png" alt="data_sharing_infra_federated_codetodata_jsheunis.png" style="margin-bottom: 2em;">
+    <p class="fragment fade-in"> => Code from all over, data from all-over
+</section>
+
+<section>
+    <h3><code>Examples of privacy preserving technology and decentralized tools:</code></h3>
+    <br>
+    
+    <ul>
+        <li><a href="https://www.openmined.org/">OpenMined</a>: secure connections, running algorithms without seeing data</li>
+        <li><a href="https://distributedlearning.ai/">Vantage6</a>: delivering algorithms to data stations and collect their results</li>
+        <li><a href="https://pht.health-ri.nl/">Personal Health Train</a>: federated machine learning in radiomics</li>
+        <li><a href="https://www.datalad.org/">DataLad</a>: decentralized data storage, access, collaboration, tracking</li>
+        <li><a href="https://coinstac.org/">COINstac</a>: decentralized pipelines, results aggregation, differential privacy</li>
+        <li><a href="https://search.kg.ebrains.eu/">EBRAINS</a>: GDPR-compliant digital research infrastructure of Human Brain Project</li>
+        <li><a href="https://portal.conp.ca/search">Canadian Open Neuroscience Platform</a>: FAIR data access while keeping personal data private</li>
+    </ul>
+</section>
+
+<section>
+    <h3><code>What is the future?</code></h3>
+    <br>
+    <img src="pics/datacat1_the_challenge.svg" alt="" style="margin-bottom: 2em;">
+</section>
+
+<section>
+    <h3><code>What is the future?</code></h3>
+    <br>
+    <img src="pics/datacat2_the_opportunity.svg" alt="" style="margin-bottom: 2em;">
+</section>
+
+<section>
+    <h3><code>Example of decentralized code-to-data</code></h3>
+    <br>
+    <img src="pics/comic_box6_publishing.svg" alt="" style="margin-bottom: 2em;">
+</section>
+
+<section>
+    <h3><code>Example of decentralized code-to-data: </code></h3>
+    <br>
+    <img src="pics/comic_box6_consumption.svg" alt="" style="margin-bottom: 2em;">
+</section>
+
+<section>
+    <h3><code>Example of decentralized code-to-data</code></h3>
+    <br>
+    <img src="pics/comic_box7.svg" alt="" style="margin-bottom: 2em;">
+</section>
+
+
+
+
+
+<section>
+    <h3><code>Examples of metadata-based catalogs</code></h3>
+    <br><br>
+    <ul>
+        <li>Google Dataset Search: <a href="https://datasetsearch.research.google.com/">https://datasetsearch.research.google.com/</a></li>
+        <li>Jülich Data: <a href="https://data.fz-juelich.de/">https://data.fz-juelich.de/</a></li>
+        <li>DataLad Catalog, e.g.: <a href="https://data.sfb1451.de/">https://data.sfb1451.de/</a></li>
+    </ul>
+</section>
+
+<section>
+    <h3><code>What is the future?</code></h3>
+    <br><br>
+    <ul>
+        <li>Interoperability with widely used tools and standards!</li>
+        <li>Semantic metadata, e.g. <a href="https://www.w3.org/TR/vocab-dcat-3/">https://www.w3.org/TR/vocab-dcat-3/</a></li>
+        <li>Technical expertise development and nurturing!</li>
+    </ul>
+</section>
+
+
+<section>
+    <h2><code>Thank you!</code></h2>
+</section>
+
+
+
+
+</div> <!-- /.slides -->
+</div> <!-- /.reveal -->
+
+<script src="reveal.js/dist/reveal.js"></script>
+<script src="reveal.js/plugin/notes/notes.js"></script>
+<script src="reveal.js/plugin/markdown/markdown.js"></script>
+<script src="reveal.js/plugin/highlight/highlight.js"></script>
+<script src="custom_functions.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+<script src="reveal.js/plugin/copycode/copycode.js"></script> -->
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+        height: 960,
+        // Factor of the display size that should remain empty around the content
+        margin: 0.02,
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+        maxScale: 1.0,
+
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: 'c',
+        pdfSeparateFragments: false,
+        pdfMaxPagesPerSlide: 1,
+        pdfPageHeightOffset: -1,
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+    });
+</script>
+</body>
+</html>
